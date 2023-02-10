@@ -42,7 +42,7 @@ const Home: NextPage = () => {
       createShortUrl.mutate(value, {
         onSuccess(data) {
           setCopy(true);
-          setUrl(`${window.location.href}${data.shortUrl}`);
+          setUrl(`${window.location.href}s/${data.shortUrl}`);
           toast.success("perfecto", {
             // duration: 3,
             position: "top-right",

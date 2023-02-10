@@ -6,7 +6,6 @@ interface data {
 }
 
 export async function middleware(req: NextRequest) {
-  console.log(req.url);
   if (req.method !== "GET")
     return NextResponse.json(
       { message: "method not allowed" },
@@ -14,8 +13,6 @@ export async function middleware(req: NextRequest) {
     );
   try {
     const slug = req.nextUrl.pathname.split("/").pop();
-
-    if (!slug) NextResponse.redirect(req.nextUrl.origin);
 
     const resp = await fetch(`${req.nextUrl.origin}/api/${slug as string}`);
 
@@ -31,5 +28,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/|favicon.ico|/).*)"],
+  matcher: "/s/:short*",
 };
