@@ -6,6 +6,11 @@ interface data {
 }
 
 export async function middleware(req: NextRequest) {
+  if (req.method !== "GET")
+    return NextResponse.json(
+      { message: "method not allowed" },
+      { status: 505 }
+    );
   try {
     const slug = req.nextUrl.pathname.split("/").pop();
 
