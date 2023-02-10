@@ -10,10 +10,10 @@ export async function middleware(req: NextRequest) {
   if (req.method !== "GET") return NextResponse.next();
   try {
     const slug = req.nextUrl.pathname.split("/").pop();
+    if (!slug) return NextResponse.next();
+    if (slug.length > 5) NextResponse.next();
 
-    if (!slug) NextResponse.redirect(req.nextUrl.origin);
-
-    const resp = await fetch(`${req.nextUrl.origin}/api/${slug as string}`);
+    const resp = await fetch(`${req.nextUrl.origin}/api/${slug}`);
 
     const data = (await resp.json()) as data;
 
