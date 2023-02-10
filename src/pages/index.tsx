@@ -144,7 +144,7 @@ const Home: NextPage = () => {
                       />
                     </circle>
                   </svg>
-                  <span>cargando</span>
+                  <span>generando</span>
                 </>
               ) : (
                 "Generar"
