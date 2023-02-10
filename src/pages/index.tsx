@@ -6,7 +6,7 @@ import ClipboardJS from "clipboard";
 
 import { api } from "../utils/api";
 import toast, { Toaster } from "react-hot-toast";
-import { useInvalidUrl } from "../context/validateContext";
+
 import Link from "next/link";
 
 interface type {
@@ -18,17 +18,11 @@ interface type {
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const createShortUrl = api.shortUrl.createShortLink.useMutation();
-  const [invalidUrl] = useInvalidUrl();
   const [url, setUrl] = useState("");
   const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     new ClipboardJS("#copy");
-    if (!invalidUrl) return;
-    toast.error("URL invalida", {
-      position: "top-center",
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlerSubmit = (e: FormEvent<HTMLFormElement>) => {
