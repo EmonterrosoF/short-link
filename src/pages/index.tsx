@@ -183,4 +183,14 @@ const Home: NextPage = () => {
   );
 };
 
+export async function getStaticProps() {
+  const resp = await fetch(
+    "https://short-link-tofgzdnk2-emonterrosof.vercel.app/api/ping"
+  );
+  const data = (await resp.json()) as { message: string };
+  console.log(data);
+  // Pass post data to the page via props
+  return { props: data };
+}
+
 export default Home;
