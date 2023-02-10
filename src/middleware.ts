@@ -6,6 +6,7 @@ interface data {
 }
 
 export async function middleware(req: NextRequest) {
+  console.log(req.url);
   if (req.method !== "GET")
     return NextResponse.json(
       { message: "method not allowed" },
@@ -28,5 +29,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|favicon.ico).*)"],
+  matcher: ["/((?!api/|_next|favicon.ico).*)"],
 };
