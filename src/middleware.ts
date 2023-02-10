@@ -7,11 +7,7 @@ interface data {
 
 export async function middleware(req: NextRequest) {
   console.log("request url", req.url);
-  if (req.method !== "GET")
-    return NextResponse.json(
-      { message: "method not allowed" },
-      { status: 505 }
-    );
+  if (req.method !== "GET") return NextResponse.next();
   try {
     const slug = req.nextUrl.pathname.split("/").pop();
 
@@ -26,10 +22,11 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(req.nextUrl.origin);
   } catch (error) {
     console.log(error);
-    return NextResponse.redirect(req.nextUrl.origin);
+    return NextResponse.next();
+    // return NextResponse.redirect(req.nextUrl.origin);
   }
 }
 
 export const config = {
-  matcher: ["/((?!_next/).*)"],
+  matcher: ["/((?!api|_next/|favicon.ico).*)"],
 };
